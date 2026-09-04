@@ -45,8 +45,8 @@ function Intro({ onBegin, loading }: { onBegin: () => void; loading: boolean }) 
           <h2>How do you notice love?</h2>
           <p>
             There isn&apos;t always just one way we want to be loved. It can change with the person, the
-            moment, and even the day. So don&apos;t think too hard. Step into each little scene and choose
-            the moment that feels closest to your heart.
+            moment, and even the day. Step into each little scene and choose the moment that feels closest
+            to your heart.
           </p>
           <button className="primary-action" onClick={onBegin} disabled={loading}>
             <Sparkles aria-hidden="true" size={18} />
