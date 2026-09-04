@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import os
+from pathlib import Path
 from uuid import uuid4
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
 from .cleanup import delete_expired_sessions
@@ -137,3 +141,17 @@ def result(session_id: str, db: Session = Depends(get_db)) -> dict:
     session.completed = True
     db.commit()
     return build_result(answers)
+
+
+static_dir = Path(os.getenv("STATIC_DIR", "")).resolve() if os.getenv("STATIC_DIR") else None
+if static_dir and (static_dir / "index.html").exists():
+    assets_dir = static_dir / "assets"
+    if assets_dir.exists():
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    def serve_frontend(full_path: str) -> FileResponse:
+        requested = (static_dir / full_path).resolve()
+        if requested.is_file() and static_dir in requested.parents:
+            return FileResponse(requested)
+        return FileResponse(static_dir / "index.html")

@@ -39,14 +39,14 @@ function Intro({ onBegin, loading }: { onBegin: () => void; loading: boolean }) 
             decoding="async"
           />
         </div>
+        <h1 id="title" className="sr-only">Ren&aacute;ta's Love Language Quiz</h1>
         <div className="intro-copy">
           <p className="eyebrow">A softer kind of quiz</p>
-          <h1 id="title">Renáta's Love Language Quiz</h1>
           <h2>How do you notice love?</h2>
           <p>
-            There isn't always one way we want to be loved. It can change with the person, the situation,
-            and even the day. This quiz looks for patterns across different kinds of moments rather than
-            forcing every answer into a single box.
+            There isn&apos;t always just one way we want to be loved. It can change with the person, the
+            moment, and even the day. So don&apos;t think too hard. Step into each little scene and choose
+            the moment that feels closest to your heart.
           </p>
           <button className="primary-action" onClick={onBegin} disabled={loading}>
             <Sparkles aria-hidden="true" size={18} />
