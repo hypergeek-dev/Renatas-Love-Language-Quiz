@@ -48,6 +48,11 @@ function Intro({ onBegin, loading }: { onBegin: () => void; loading: boolean }) 
             moment, and even the day. Step into each little scene and choose the moment that feels closest
             to your heart.
           </p>
+          <p className="tender-note">
+            Sometimes both choices will sound lovely. That&apos;s intentional. Don&apos;t ask which one you would
+            enjoy. Imagine you could only receive one in that moment, and choose the one you would miss more if it
+            were absent.
+          </p>
           <button className="primary-action" onClick={onBegin} disabled={loading}>
             <Sparkles aria-hidden="true" size={18} />
             {loading ? "Preparing..." : "Begin"}

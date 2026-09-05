@@ -63,4 +63,28 @@ describe("App", () => {
     expect(screen.getByRole("button", { name: "Begin" })).toBeInTheDocument();
     expect(screen.queryByText("Question 1 of 30")).not.toBeInTheDocument();
   });
+
+  test("shows binary A/B choices and no Both option", async () => {
+    render(<App />);
+    await screen.findByText("Begin");
+    await userEvent.click(screen.getByText("Begin"));
+    expect(screen.getByText("Tender words")).toBeInTheDocument();
+    expect(screen.getByText("Unhurried time")).toBeInTheDocument();
+    expect(screen.queryByText(/both/i)).not.toBeInTheDocument();
+  });
+
+  test("selecting a choice sends the corresponding answer key", async () => {
+    render(<App />);
+    await screen.findByText("Begin");
+    await userEvent.click(screen.getByText("Begin"));
+    await userEvent.click(screen.getByText("Unhurried time"));
+    await waitFor(() =>
+      expect(fetch).toHaveBeenCalledWith(
+        "/api/session/session-1/answer",
+        expect.objectContaining({
+          body: JSON.stringify({ question_id: 1, selected_answer: "B" })
+        })
+      )
+    );
+  });
 });

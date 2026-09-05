@@ -202,6 +202,19 @@ button:disabled {
   font-size: 0.9rem;
 }
 
+.tender-note {
+  margin: 20px 0 0;
+  padding: 16px 18px;
+  color: var(--rose-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  background: rgba(246, 226, 223, 0.4);
+  border-left: 3px solid var(--dust);
+  border-radius: 4px;
+}
+
 .quiz-frame {
   padding: clamp(18px, 4vw, 34px);
   background:

@@ -7,6 +7,15 @@ def test_binary_answer_scoring():
     assert scores["SERVICE"] == 1
 
 
+def test_editing_an_answer_replaces_rather_than_adds():
+    first = calculate_raw_scores({1: "A"})
+    assert first["WORDS"] == 1
+    edited = calculate_raw_scores({1: "B"})
+    assert edited["WORDS"] == 0
+    assert edited["TIME"] == 1
+    assert sum(edited.values()) == 1
+
+
 def test_score_normalization_totals_100():
     percentages = normalize_percentages({"WORDS": 1, "TIME": 1, "SERVICE": 1, "TOUCH": 1, "GIFTS": 1})
     assert sum(percentages.values()) == 100
@@ -48,7 +57,7 @@ def test_tie_order_is_deterministic():
     }
     result = build_result(balanced_answers)
     assert result["percent_total"] == 100
-    assert result["primary"]["key"] == "WORDS"
+    assert result["primary"]["key"] == "SERVICE"
     assert result["profile_shape"] == "Broad"
 
 
